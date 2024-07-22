@@ -1,0 +1,404 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[russian]{babel}
+\usepackage[cp1251]{inputenc}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{cite}
+\usepackage{wrapfig}
+\usepackage{physics}
+\usepackage{wrapft}
+\usepackage{epstopdf}
+\usepackage[small]{caption}
+\usepackage{subcaption}
+
+\renewcommand{\baselinestretch}{1.0}
+
+
+\usepackage{indentfirst} % отделять первую строку раздела абзацным отступом тоже
+\usepackage{makecell} % фиксированный размер ячейки таблицы
+\usepackage{multirow} % улучшенное форматирование таблиц, объединение строк
+
+\usepackage{enumitem}
+
+\oddsidemargin	-1cm
+\topmargin		-2cm
+\textwidth		18.2cm
+\textheight		24.2cm
+
+\newcommand{\D}{\displaystyle}
+
+\righthyphenmin=0
+\parindent=0mm
+\parskip= 2.0 mm
+\righthyphenmin=0
+
+
+\begin{document}
+
+\graphicspath{{figures/}}
+
+\baselineskip = 20 true pt \vspace{40mm} \large
+\begin{titlepage}
+\begin{center}
+Федеральное государственное бюджетное образовательное учреждение высшего образования\\[0.5cm]
+Омский государственный университет им. Ф.М. Достоевского\\[4.5cm]
+
+Математическое моделирование\\ уравнений математической физики\\[2cm]
+Задание № 1\\[1cm]
+\uppercase{{\large{
+	Численные методы решения задачи Коши для системы обыкновенных дифференциальных уравнений
+}}}\\[3cm]
+Вариант №\ 8 - 6\\[2cm]
+\end{center}
+
+\begin{flushright}
+Выполнил:\\
+студент группы ФПБ-803\\
+Хитринцевва Валерия Вадимовна\\[3cm]
+\end{flushright}
+
+\begin{center}
+Омск-2021
+\end{center}
+\end{titlepage}
+
+%>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+\setcounter{page}{2} 
+\tableofcontents
+\newpage
+%>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+\section*{Введение}
+\addcontentsline{toc}{section}{Введение} \hspace*{1cm}
+Решение обыкновенных дифференциальных уравнений занимает важное 
+место среди прикладных задач физики, химии и техники. При 
+этом конкретная прикладная задача может приводить к  
+дифференциальному уравнению любого порядка, или к системе  
+уравнений любого порядка. 
+\par Методы решения можно условно разбить на точные,  
+приближенные и численные. Поскольку нахождение точного решения возможно лишь для отдельных классов уравнений, с появлением компьютеров численные методы стали основным инструментом решения прикладных задач.
+%\par В численных методах выбирается некоторая сетка значений 
+%аргумента $ t_0 < t_1 < \ldots < t_n = T $ и вычисляются  
+%приближенные значения решения $U_n \approx U(t_n)$ в узлах этой сетки. Решение при этом имеет вид таблицы. Численные методы не %позволяют 
+%найти общее решение системы. Однако эти методы применимы к любым классам ОДУ и всем типам задач для них. 
+\par Численные методы можно разделить на одношаговые и многошаговые.
+\par В одношаговых методах после определения $u_n$ в точке $t_n$, значение $u_{n-1}$ отбрасывается и уже не используется в последующих вычислениях. В многошаговых методах для получения $u_n$ необходимо знать решения на всех предыдущих шагах. Таким образом, для реализации многошагового метода нужно использовать стартовый одношаговый метод того же порядка.
+\par В данной работе проводится численное решение задачи Коши:
+\begin{equation}
+	\begin{matrix}
+		& \left\{
+		\begin{matrix}
+			 \displaystyle \dv{ \textbf{U}}{ t} = \textbf{F}(\textbf{U},t)& \qquad \textbf{U} = \textbf{U}(t) \\
+			\textbf{U}(t=t_0) =\textbf{ U}_0  & \qquad t \in [t_0, t_0 + T]
+		\end{matrix} \right.
+	\end{matrix}
+\end{equation}
+
+Общая форма записи $k -$ стадийного линейного многошагового метода:
+\begin{equation}
+	\textbf{U}_n = \sum\limits_{i=1}^{k}\alpha_i \textbf{U}_{n-i} + \tau\sum\limits_{i=0}^{k}\beta_iF(U_{n-i}, t_{n-i})	, 
+\end{equation}
+\begin{flushleft}
+	
+	где 
+	$\textbf{U} $-- совокупность решений,в данном случае - вектор,\\
+	$\tau = \frac{T}{N}$ -- ширина шага, \\
+	$N $ -- количество шагов разбиения, \\
+	$\alpha_i = 0$ при $ i > 1.$\\
+\end{flushleft}
+
+Как стартовый можно использовать метод Рунге-Кутты соответствующего порядка. Общая форма записи $k -$ стадийного метода Рунге-Кутты:
+\begin{equation}
+	\begin{matrix}
+		& 
+		\begin{matrix}
+			\textbf{U}_n = \textbf{U}_{n-1} + \tau\sum\limits_{m=1}^{\textbf{k}}b_mk_m	 \\
+			\textbf{k}_m = \textbf{F}(\textbf{U}_{n-1} + \tau\sum\limits_{l=1}^{\textbf{k}}a_{ml}k_l,   t_{n-1} + c_m\tau)
+		\end{matrix} 
+	\end{matrix}
+\end{equation}
+Формулировку метода Рунге-Кутты принято оформлять в виде таблицы Бутчера.
+\begin{table}[h!]\caption{Таблица Бутчера }\label{tab:1}
+	\begin{center}
+		\begin{tabular}{>{\bfseries}p{0.5cm}|>{\itshape}p{3.5cm}}
+			
+			$c_1$ &$a_{11} \quad  a_{12} \quad \ldots \quad a_{1k}$ \\
+			$c_2$ &$a_{21} \quad  a_{22} \quad \ldots \quad a_{2k}$ \\
+			$\vdots$ &$\quad\vdots \qquad \vdots \quad \ddots \quad \vdots$	\\
+			$c_k$ &$a_{k1} \quad  a_{k2} \quad \ldots \quad a_{kk}$	\\
+			\hline
+			&$b_1  \qquad b_2 \quad \ldots \quad b_k $ \\
+			
+		\end{tabular}
+	\end{center}
+\end{table}
+%>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+\newpage
+\section{Постановка задачи}
+\begin{enumerate}[itemindent=0.0em]
+	 \setlength{\itemsep}{1pt}%
+	\item Разработать программу для ЭВМ решения задачи Коши для системы из N обыкновенных дифференциальных уравнений первого порядка.
+	\item С использованием разработанной программы для ЭВМ осуществить решение тестовой задачи Коши для
+	гармонического осциллятора. Построить динамические зависимости решения и относительной погрешности
+	решения.
+	\item С использованием разработанной программы для ЭВМ осуществить решение индивидуального задания с
+	задачей Коши для системы обыкновенных дифференциальных уравнений.
+\end{enumerate}
+
+Индивидуальное задание:\\ Уравнение движения механической системы с лагранжианом
+\begin{equation}
+ L = \frac{m_1a^2}{2}(\dot \Theta + \Omega^2\sin^2{\Theta^2} + m_2a^2\dot\Theta^2\sin^2{\Theta} + ga(m_1+m_2)\cos{\Theta} 
+\end{equation}
+где $m_1, m_2$ -- массы частиц; $a = const$ имеет размерность длины; $\Omega = const;$ -- угловая скорость вращения системы. \\Осуществить расчеты с $m_1 = m_2 = m$, при различных значениях $\Omega$ и начальных условиях, охватывающих случаи малых гармонических колебаний и нелинейных колебаний. Построить динамические
+кривые $\Theta = \Theta(t)$,  $\dot\Theta =\dot\Theta(t)$ и фазовые кривые $(\Theta, \dot\Theta)$. Для гармонических колебаний сравнить полученные результаты
+с аналитическим решением и описать возникшие различия.
+
+Уравнение движения с учетом обезразмеривания:
+\begin{equation}
+\Theta^{\prime\prime}\ [1 + 2\sin^2{\Theta}] + 2{\Theta^{\prime}}^2\sin{\Theta}\cos{\Theta} - \gamma^2\sin{\Theta}cos{\Theta} +  2sin{\Theta} = 0
+\end{equation} 
+где $\gamma = \sqrt{\frac{a}{g}}\  \Omega$. \\
+Начальные условия:\\
+$\overrightarrow{\rm U}_0 = \begin{bmatrix}
+	\Theta_0\\
+	0
+\end{bmatrix}$
+\\
+Итоговые зависимости:
+$\Theta(t) = \Theta_0 f(\sqrt{\frac{a}{g}}\ t,\  \Omega\ \sqrt{\frac{a}{g}},\ \Theta_0)$
+
+%>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+\newpage
+\section{Полученные результаты и их анализ}\hspace*{1cm}
+\numberwithin{figure}{subsection}
+Коэффициенты $\beta_k$ многостадийного метода Адамса-Мултона второго порядка точности:  $\beta_k =\Big\{  \frac{1}{2}, \frac{1}{2} \Big\}$.
+\\В качестве стартового метода был выбран Лобатто $IIIC$ второго порядка точности:
+\begin{table}[h!]\caption{Таблица Бутчера для Лобатто $IIIC$ }\label{tab:1}
+	\begin{center}
+		\begin{tabular}{>{\bfseries}p{0.5cm}|>{\itshape}p{2cm}}
+			$0$ &$\frac{1}{2} $\ \ \ \   $- \frac{1}{2}$\\
+			$1$ &$\frac{1}{2}$ \qquad$\frac{1}{2}$	\\
+			\hline
+			&$\frac{1}{2}$  \qquad$\frac{1}{2}$ \\
+			
+		\end{tabular}
+	\end{center}
+\end{table}
+\begin{enumerate}
+	 \setlength{\itemsep}{0.5pt}%
+	\item Начальный момент времени $t_{start} = 0$
+	\item Конечный момент времени $t_{end} = 100$
+	\item Количество шагов разбиения $time\_steps\_amount = 10'000$
+	\item Значения $\gamma = 0.5, 1.0, 1.5, 2.0, 3.0, 4.0, 5.0.$
+	\item Значения $\Theta_0 = 1.0, 2.0. 3.0.$
+\end{enumerate}
+
+\newpage
+\subsection{Решение задачи Коши для гармонического осциллятора}
+
+
+\begin{figure}[h!]
+	\begin{minipage}[h]{0.55\linewidth}
+		\centering{\includegraphics[width=\textwidth]{GR/teta.eps} a)}
+	\end{minipage}
+	\begin{minipage}[h]{0.55\linewidth}
+		\centering{\includegraphics[width=\textwidth]{GR/teta_st.eps} b) }
+	\end{minipage}
+	\caption{Динамические зависимости a) $\Theta = \Theta(t)$; b) $\dot\Theta = \dot\Theta(t)$}
+\end{figure}
+
+\begin{figure}[h!]
+	\begin{minipage}[h]{0.55\linewidth}
+		\centering{\includegraphics[width=\textwidth]{GR/FT.eps} \caption{Фазовая траектория}}
+	\end{minipage}
+	\begin{minipage}[h]{0.55\linewidth}
+	\centering{\includegraphics[width=\textwidth]{GR/error.eps} \caption{Погрешность вычислений}}
+	\end{minipage}
+\end{figure}
+\par Анализируя полученные графики, можно отметить, что решение, полученное многошаговым методом, соответствует точному решению.
+
+
+
+\newpage
+\subsection{Решение индивидуального задания}   
+\subsubsection{Решение индивидуального задания при  $ \theta_0 = 1.0 $ }   
+\par Решение индивидуального задания при  $\gamma = 0.5 $.
+\begin{figure}[h!]
+	\begin{minipage}[h]{0.55\linewidth}
+		\centering{\includegraphics[width=\textwidth]{GR/tetta_omega_0.5.eps} a)}
+	\end{minipage}
+	\begin{minipage}[h]{0.55\linewidth}
+		\centering{\includegraphics[width=\textwidth]{GR/tetta_st_omega_0.5.eps} b) }
+	\end{minipage}
+	\caption{Динамические зависимости a) $\Theta = \Theta(t)$; b) $\dot\Theta = \dot\Theta(t)$}
+\end{figure}
+\begin{figure}[h!]
+	\centering{	\begin{minipage}[h]{0.55\linewidth}
+			\includegraphics[width=\textwidth]{GR/FT_omega_0.5.eps} 
+	\end{minipage}}
+	\caption{Фазовая траектория}
+\end{figure}
+\newpage
+\begin{figure}[h!]
+	\begin{minipage}[h]{0.55\linewidth}
+		\centering{\includegraphics[width=\textwidth]{GR/t_b_15.eps} a)}
+	\end{minipage}
+	\begin{minipage}[h]{0.55\linewidth}
+		\centering{\includegraphics[width=\textwidth]{GR/t_st_b_15.eps} b) }
+	\end{minipage}
+	\caption{Динамические зависимости a) $\Theta = \Theta(t)$; b) $\dot\Theta = \dot\Theta(t)$ при $\gamma = 0.5, 1.0, 1.5$}
+\end{figure}
+\begin{figure}[h!]
+	\begin{minipage}[h]{0.55\linewidth}
+		\centering{\includegraphics[width=\textwidth]{GR/g_b_15.eps} a)}
+	\end{minipage}
+	\begin{minipage}[h]{0.55\linewidth}
+		\centering{\includegraphics[width=\textwidth]{GR/st_g_b_15.eps} b) }
+	\end{minipage}
+	\caption{Динамические зависимости a) $\Theta = \Theta(t)$; b) $\dot\Theta = \dot\Theta(t)$ при $\gamma = 2.5, 3.0, 4.0$}
+\end{figure}
+\newpage
+\begin{figure}[h!]
+	\centering{	\begin{minipage}[h]{0.55\linewidth}
+			\includegraphics[width=\textwidth]{GR/all_ft_1.eps} 
+	\end{minipage}}
+	\caption{Фазовая траектория при $\gamma = 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 4.0$}
+\end{figure}
+
+На графиках, представленных на рис.$2.2.3$, построены динамические зависимости $\Theta(t)$ и $\dot\Theta(t)$ при $\gamma = 0.5, 1.0, 1.5.$. Можно отметить, что система колеблется около устойчивого положения равновесия в области $0$, амплитуда не меняется, но с увеличением $\gamma$ увеличиваеся период колебаний.\\
+На графиках, представленных на рис.$2.2.3$, построены динамические зависимости $\Theta(t)$ и $\dot\Theta(t)$ при $\gamma = 2.5, 3.0, 4.0.$. С увеличением $\gamma$ происходит смещение положения равновесия колебательного движения. Отсюда следует изменение всех параметров, также меняется фазовая траектория.\\
+Можно отметить, что при $\gamma \leq 1.5$ положение равновесия находится в области $0$, при $\gamma > 1.5$ положение равновесия плавно смещается, также меняются все параметры системы.
+
+\newpage
+\subsubsection{Решение индивидуального задания при  $ \theta_0 = 2.0 $ }  
+\par Решение индивидуального задания при  $\gamma = 0.5 $          
+\begin{figure}[h!]
+	\begin{minipage}[h]{0.55\linewidth}
+		\centering{\includegraphics[width=\textwidth]{GR/tetta_2_gamma_0.5.eps} a)}
+	\end{minipage}
+	\begin{minipage}[h]{0.55\linewidth}
+		\centering{\includegraphics[width=\textwidth]{GR/tetta_st_2_gamma_0.5.eps} b) }
+	\end{minipage}
+	\caption{Динамические зависимости a) $\Theta = \Theta(t)$; b) $\dot\Theta = \dot\Theta(t)$}
+\end{figure}
+\begin{figure}[h!]
+	\centering{	\begin{minipage}[h]{0.55\linewidth}
+			\includegraphics[width=\textwidth]{GR/FT_tetta_2.eps} 
+	\end{minipage}}
+	\caption{Фазовая траектория}
+\end{figure}
+
+\newpage
+\begin{figure}[h!]
+	\begin{minipage}[h]{0.55\linewidth}
+		\centering{\includegraphics[width=\textwidth]{GR/tetta_2_gamma_m_2.eps} a)}
+	\end{minipage}
+	\begin{minipage}[h]{0.55\linewidth}
+		\centering{\includegraphics[width=\textwidth]{GR/tetta_st_2_gamma_m_2.eps} b) }
+	\end{minipage}
+	\caption{Динамические зависимости a) $\Theta = \Theta(t)$; b) $\dot\Theta = \dot\Theta(t)$ при $\gamma = 0.5, 1.0, 1.5, 2.0$}
+\end{figure}
+\begin{figure}[h!]
+	\begin{minipage}[h]{0.55\linewidth}
+		\centering{\includegraphics[width=\textwidth]{GR/tetta_b_2.eps} a)}
+	\end{minipage}
+	\begin{minipage}[h]{0.55\linewidth}
+		\centering{\includegraphics[width=\textwidth]{GR/tetta_st_2_gamma_b_2.eps} b) }
+	\end{minipage}
+	\caption{Динамические зависимости a) $\Theta = \Theta(t)$; b) $\dot\Theta = \dot\Theta(t)$ при $\gamma = 3.0, 4.0, 5.0$}
+\end{figure}
+Для $\theta = 2.0$ и $\gamma = 0.5, 1.0 ,1.5, 2.0$ система колеблется, не меняя положения равновесия.\\
+Вид графика $\dot\Theta(t)$ изменяется с изменением $\gamma$, пики точек поворота становятся острыми, изменяются не плавно.\\
+При значении $\gamma = 3.0, 4.0 ,5.0$ система колеблется около разных точек положения равновесия -- происходит смещение положения равновесия, также меняются все параметры системы.
+
+\newpage
+\subsubsection{Решение индивидуального задания при  $ \theta_0 = 3.0 $ }     
+\begin{figure}[h!]
+	\begin{minipage}[h]{0.55\linewidth}
+		\centering{\includegraphics[width=\textwidth]{GR/tetta_3.eps} a)}
+	\end{minipage}
+	\begin{minipage}[h]{0.55\linewidth}
+		\centering{\includegraphics[width=\textwidth]{GR/tetta_st_3.eps} b) }
+	\end{minipage}
+	\caption{Динамические зависимости a) $\Theta = \Theta(t)$; b) $\dot\Theta = \dot\Theta(t)$}
+\end{figure}
+\begin{figure}[h!]
+	\centering{	\begin{minipage}[h]{0.55\linewidth}
+			\includegraphics[width=\textwidth]{GR/FT_tetta_3.eps} 
+	\end{minipage}}
+	\caption{Фазовая траектория}
+\end{figure}
+Для $\theta = 3.0$  изменения $\gamma \in [0.5,4.0]$ не приводят к смещению положения равновесия, система колеблется в области $0$.\\
+В то же время поведение $\dot\Theta(t)$ зависит от значения $\gamma$. При $\gamma \leq 2.0$ точки перегиба представлены в виде пиков, изменяются не плавно. При $\gamma > 2.0$  $\dot\Theta(t)$ изменяется более плавно. С увеличением $\gamma$ период уменьшается.\\
+Вид фазовых траекторий показывает отсутствие переходного процесса при $\gamma \leq 5$
+
+\newpage
+\subsubsection{Сравнение решений при  $ \theta_0 = 1.0, 2.0, 3.0 $ }     
+\begin{figure}[h!]
+	\begin{minipage}[h]{0.55\linewidth}
+		\centering{\includegraphics[width=\textwidth]{GR/all_tetta.eps} a)}
+	\end{minipage}
+	\begin{minipage}[h]{0.55\linewidth}
+		\centering{\includegraphics[width=\textwidth]{GR/all_tetta_st.eps} b) }
+	\end{minipage}
+	\caption{Динамические зависимости a) $\Theta = \Theta(t)$; b) $\dot\Theta = \dot\Theta(t)$}
+\end{figure}
+\begin{figure}[h!]
+	\centering{	\begin{minipage}[h]{0.55\linewidth}
+			\includegraphics[width=\textwidth]{GR/ALL_FP.eps} 
+	\end{minipage}}
+	\caption{Фазовая траектория}
+\end{figure}
+По графикам динамических зависимостей можно сказать, что при одинаковых значениях $\gamma = 0.5$, но разных значениях $\Theta_0$ система колеблется в области одного положения равновесия, изменение $\Theta_0$ приводит только к увеличению периода колебаний, при увеличении $\Theta_0$ поведение $\dot\Theta(t)$ становится более плавным.
+График фазовых кривых показывает, что вокруг центра существует множество траекторий, которые получаются при разных значения $\Theta_0$ и $\gamma$. Чем больше $\Theta_0$, тем больше искажается фазовая траектория.
+%>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+\newpage
+\section*{Заключение}
+\addcontentsline{toc}{section}{Заключение} \hspace*{1cm}
+В данной работе были рассмотрены:
+ \begin{enumerate}
+ 	\item Задача гармонического оциллятора. Построены динамические зависимости $\Theta(t)$ и $\dot\Theta(t)$, фазовые кривые $(\Theta(t),\dot\Theta(t))$, графики погрешности.
+ 	\item Индивидуальная задача. Построены динамические зависимости $\Theta(t)$ и $\dot\Theta(t)$, фазовые кривые $(\Theta(t),\dot\Theta(t))$.
+ \end{enumerate}
+Для получения результатов был реализован многошаговый метод Адамса-Мултона со стартовым методом Лобатто $IIIC$ второго порядка точности.\\
+Анализируя графики, представленные ранее, можно сделать выводы:
+ \begin{enumerate}
+	\item При значениях $\Theta = 1.0$ и $ \gamma < 1.6$,  $\Theta = 2.0$ и $\gamma < 2.8$ колебания системы происходят в области нулевого положения равновесия. С увеличением $\Theta_0$ увеличивается только период колебаний системы. 
+	\item При значениях $\Theta = 1.0$ и $ \gamma > 1.6$,  $\Theta = 2.0$ и $\gamma > 2.8$ меняются все параметры системы: происходит сдвиг положения равновесия, меняются точки останова, изменяется амплитуда и период колебаний. Т.е. наблюдается переходной процесс от линейных колебаний к нелинейным.
+\end{enumerate}
+
+
+%>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+\newpage
+\addcontentsline{toc}{section}{Список литературы}
+\begin{thebibliography}{99}
+
+\bibitem{Kalitkin_2013_1}
+Калиткин Н.Н., Альшина Е.А., Корякин П.В. 
+Численные методы. Книга 1. Численный анализ. --- М.: Академия, 2013. 
+
+\bibitem{Kalitkin_2013_2}
+Калиткин Н.Н., Корякин П.В. 
+Численные методы. Книга 2. Методы математической физики. --- М.: Академия, 2013. 
+
+\bibitem{Kalitkin_BJK_2003}
+Бахвалов Н.С., Жидков Н.П., Кобельков Г.М. 
+Численные методы. --- М.: Бином, 2003, 2012.
+
+\bibitem{HNW_I}
+Хайрер Э., Нёрсетт С., Ваннер Г. 
+Решение обыкновенных дифференциальных уравнений. 
+Нежесткие задачи. --- М.: Мир, 1990.
+
+\bibitem{HNW_II}
+Хайрер Э., Ваннер Г. 
+Решение обыкновенных дифференциальных уравнений. 
+Жесткие и дифференциально-алгебраические задачи. --- М.: Мир, 1999.
+
+\bibitem{Butcher_2016}
+Butcher J.C. Numerical Methods for Ordinary Differential Equations. --- 
+John Wiley \& Sons, 2016.
+
+\end{thebibliography}
+\end{document}

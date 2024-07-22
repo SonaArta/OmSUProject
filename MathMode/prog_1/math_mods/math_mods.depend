@@ -1,0 +1,232 @@
+# depslib dependency file v1.0
+1618553865 source:/home/panda/VirtualBox VMs/public/math_mods/main.cpp
+	"include/tasks.hxx"
+
+1618554183 /home/panda/VirtualBox VMs/public/math_mods/include/tasks.hxx
+	"all.hxx"
+	"ODE_Solver.hxx"
+
+1618553873 /home/panda/VirtualBox VMs/public/math_mods/include/all.hxx
+	"library.hxx"
+	"rkm_implicit.hxx"
+	"rkm_explicit.hxx"
+	"msm.hxx"
+	"math_vector.hxx"
+	"circular_array.hxx"
+	"slae_solver.hxx"
+	"snae_solver.hxx"
+
+1617359198 /home/panda/VirtualBox VMs/public/math_mods/include/library.hxx
+	<iostream>
+	<iomanip>
+	<fstream>
+	<cstring>
+	<vector>
+	<math.h>
+	<cmath>
+	<functional>
+	<algorithm>
+
+1618554139 /home/panda/VirtualBox VMs/public/math_mods/include/rkm_implicit.hxx
+	"library.hxx"
+	"math_vector.hxx"
+	"rkm.hxx"
+	"butcher_table.hxx"
+	"ODE_Solver.hxx"
+
+1617961010 /home/panda/VirtualBox VMs/public/math_mods/include/math_vector.hxx
+	"library.hxx"
+
+1618327006 /home/panda/VirtualBox VMs/public/math_mods/include/rkm.hxx
+	"library.hxx"
+	"math_vector.hxx"
+	"butcher_table.hxx"
+	"ODE_Solver.hxx"
+
+1617516750 /home/panda/VirtualBox VMs/public/math_mods/include/butcher_table.hxx
+	<vector>
+	<cmath>
+
+1618328038 /home/panda/VirtualBox VMs/public/math_mods/include/ODE_Solver.hxx
+	"library.hxx"
+	"math_vector.hxx"
+
+1618544170 /home/panda/VirtualBox VMs/public/math_mods/include/rkm_explicit.hxx
+	"library.hxx"
+	"rkm.hxx"
+	"math_vector.hxx"
+	"butcher_table.hxx"
+	"ODE_Solver.hxx"
+
+1618554160 /home/panda/VirtualBox VMs/public/math_mods/include/msm.hxx
+	"library.hxx"
+	"rkm.hxx"
+	"snae_solver.hxx"
+	"circular_array.hxx"
+	"ODE_Solver.hxx"
+
+1618543742 /home/panda/VirtualBox VMs/public/math_mods/include/snae_solver.hxx
+	"library.hxx"
+	"math_vector.hxx"
+
+1618327060 /home/panda/VirtualBox VMs/public/math_mods/include/circular_array.hxx
+	"library.hxx"
+
+1617536514 /home/panda/VirtualBox VMs/public/math_mods/include/slae_solver.hxx
+	"library.hxx"
+	"math_vector.hxx"
+
+1618564441 source:c:\users\Хитринцева Валерия\downloads\math_mods\main.cpp
+	"include/tasks.hxx"
+
+1619171824 c:\users\Хитринцева Валерия\downloads\math_mods\include\tasks.hxx
+	"all.hxx"
+	"ODE_Solver.hxx"
+
+1618553872 c:\users\Хитринцева Валерия\downloads\math_mods\include\all.hxx
+	"library.hxx"
+	"rkm_implicit.hxx"
+	"rkm_explicit.hxx"
+	"msm.hxx"
+	"math_vector.hxx"
+	"circular_array.hxx"
+	"slae_solver.hxx"
+	"snae_solver.hxx"
+
+1617359198 c:\users\Хитринцева Валерия\downloads\math_mods\include\library.hxx
+	<iostream>
+	<iomanip>
+	<fstream>
+	<cstring>
+	<vector>
+	<math.h>
+	<cmath>
+	<functional>
+	<algorithm>
+
+1618554138 c:\users\Хитринцева Валерия\downloads\math_mods\include\rkm_implicit.hxx
+	"library.hxx"
+	"math_vector.hxx"
+	"rkm.hxx"
+	"butcher_table.hxx"
+	"ODE_Solver.hxx"
+
+1617961010 c:\users\Хитринцева Валерия\downloads\math_mods\include\math_vector.hxx
+	"library.hxx"
+
+1618327006 c:\users\Хитринцева Валерия\downloads\math_mods\include\rkm.hxx
+	"library.hxx"
+	"math_vector.hxx"
+	"butcher_table.hxx"
+	"ODE_Solver.hxx"
+
+1617516750 c:\users\Хитринцева Валерия\downloads\math_mods\include\butcher_table.hxx
+	<vector>
+	<cmath>
+
+1618328038 c:\users\Хитринцева Валерия\downloads\math_mods\include\ode_solver.hxx
+	"library.hxx"
+	"math_vector.hxx"
+
+1618544170 c:\users\Хитринцева Валерия\downloads\math_mods\include\rkm_explicit.hxx
+	"library.hxx"
+	"rkm.hxx"
+	"math_vector.hxx"
+	"butcher_table.hxx"
+	"ODE_Solver.hxx"
+
+1618554160 c:\users\Хитринцева Валерия\downloads\math_mods\include\msm.hxx
+	"library.hxx"
+	"rkm.hxx"
+	"snae_solver.hxx"
+	"circular_array.hxx"
+	"ODE_Solver.hxx"
+
+1618543742 c:\users\Хитринцева Валерия\downloads\math_mods\include\snae_solver.hxx
+	"library.hxx"
+	"math_vector.hxx"
+
+1618327060 c:\users\Хитринцева Валерия\downloads\math_mods\include\circular_array.hxx
+	"library.hxx"
+
+1617536514 c:\users\Хитринцева Валерия\downloads\math_mods\include\slae_solver.hxx
+	"library.hxx"
+	"math_vector.hxx"
+
+1618564441 source:c:\users\Хитринцева Валерия\desktop\3курс\матмоды\2semestr\prog_first\math_mods\main.cpp
+	"include/tasks.hxx"
+
+1619544799 c:\users\Хитринцева Валерия\desktop\3курс\матмоды\2semestr\prog_first\math_mods\include\tasks.hxx
+	"all.hxx"
+	"ODE_Solver.hxx"
+
+1618553872 c:\users\Хитринцева Валерия\desktop\3курс\матмоды\2semestr\prog_first\math_mods\include\all.hxx
+	"library.hxx"
+	"rkm_implicit.hxx"
+	"rkm_explicit.hxx"
+	"msm.hxx"
+	"math_vector.hxx"
+	"circular_array.hxx"
+	"slae_solver.hxx"
+	"snae_solver.hxx"
+
+1617359198 c:\users\Хитринцева Валерия\desktop\3курс\матмоды\2semestr\prog_first\math_mods\include\library.hxx
+	<iostream>
+	<iomanip>
+	<fstream>
+	<cstring>
+	<vector>
+	<math.h>
+	<cmath>
+	<functional>
+	<algorithm>
+
+1618554138 c:\users\Хитринцева Валерия\desktop\3курс\матмоды\2semestr\prog_first\math_mods\include\rkm_implicit.hxx
+	"library.hxx"
+	"math_vector.hxx"
+	"rkm.hxx"
+	"butcher_table.hxx"
+	"ODE_Solver.hxx"
+
+1617961010 c:\users\Хитринцева Валерия\desktop\3курс\матмоды\2semestr\prog_first\math_mods\include\math_vector.hxx
+	"library.hxx"
+
+1618327006 c:\users\Хитринцева Валерия\desktop\3курс\матмоды\2semestr\prog_first\math_mods\include\rkm.hxx
+	"library.hxx"
+	"math_vector.hxx"
+	"butcher_table.hxx"
+	"ODE_Solver.hxx"
+
+1617516750 c:\users\Хитринцева Валерия\desktop\3курс\матмоды\2semestr\prog_first\math_mods\include\butcher_table.hxx
+	<vector>
+	<cmath>
+
+1618328038 c:\users\Хитринцева Валерия\desktop\3курс\матмоды\2semestr\prog_first\math_mods\include\ode_solver.hxx
+	"library.hxx"
+	"math_vector.hxx"
+
+1618544170 c:\users\Хитринцева Валерия\desktop\3курс\матмоды\2semestr\prog_first\math_mods\include\rkm_explicit.hxx
+	"library.hxx"
+	"rkm.hxx"
+	"math_vector.hxx"
+	"butcher_table.hxx"
+	"ODE_Solver.hxx"
+
+1618554160 c:\users\Хитринцева Валерия\desktop\3курс\матмоды\2semestr\prog_first\math_mods\include\msm.hxx
+	"library.hxx"
+	"rkm.hxx"
+	"snae_solver.hxx"
+	"circular_array.hxx"
+	"ODE_Solver.hxx"
+
+1618543742 c:\users\Хитринцева Валерия\desktop\3курс\матмоды\2semestr\prog_first\math_mods\include\snae_solver.hxx
+	"library.hxx"
+	"math_vector.hxx"
+
+1618327060 c:\users\Хитринцева Валерия\desktop\3курс\матмоды\2semestr\prog_first\math_mods\include\circular_array.hxx
+	"library.hxx"
+
+1617536514 c:\users\Хитринцева Валерия\desktop\3курс\матмоды\2semestr\prog_first\math_mods\include\slae_solver.hxx
+	"library.hxx"
+	"math_vector.hxx"
+

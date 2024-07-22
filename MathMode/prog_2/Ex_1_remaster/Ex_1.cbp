@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Ex_1" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/Ex_1" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+					<Add directory="include" />
+					<Add directory="F:/prog/Ex_1/include" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/Ex_1" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add directory="include" />
+					<Add directory="F:/prog/Ex_1/include" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+		</Compiler>
+		<Unit filename="include/all.hxx" />
+		<Unit filename="include/butcher_table.hxx" />
+		<Unit filename="include/circular_array.hxx" />
+		<Unit filename="include/library.hxx" />
+		<Unit filename="include/math_vector.hxx" />
+		<Unit filename="include/msm.hxx" />
+		<Unit filename="include/rkm.hxx" />
+		<Unit filename="include/rkm_explicit.hxx" />
+		<Unit filename="include/rmk_implicit.hxx" />
+		<Unit filename="include/shooting_method.hxx" />
+		<Unit filename="include/slae_solver.hxx" />
+		<Unit filename="include/snae_solver.hxx" />
+		<Unit filename="include/tasks.hxx" />
+		<Unit filename="main.cpp" />
+		<Extensions>
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
