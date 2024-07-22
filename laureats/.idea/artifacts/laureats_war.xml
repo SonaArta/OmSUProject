@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="laureats:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>laureats</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="laureats-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="laureats:war exploded" />
+    </root>
+  </artifact>
+</component>
